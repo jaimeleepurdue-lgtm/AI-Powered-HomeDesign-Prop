@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Future of Home Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --cream: #f5f0e8;
+    --warm: #c8b89a;
+    --accent: #d4522a;
+    --mid: #2a2a2a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(212,82,42,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(200,184,154,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .tag {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 110px);
+    line-height: 1.0;
+    font-weight: 900;
+    max-width: 900px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--warm);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    color: rgba(245,240,232,0.6);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-top: 36px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px; left: 60px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.3);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1s;
+  }
+
+  .scroll-hint::before {
+    content: '';
+    width: 40px; height: 1px;
+    background: rgba(245,240,232,0.3);
+  }
+
+  /* WHAT */
+  .what {
+    padding: 120px 60px;
+    border-top: 1px solid rgba(245,240,232,0.08);
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 60px;
+  }
+
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .what-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    line-height: 1.15;
+    font-weight: 700;
+  }
+
+  .what-left h2 em {
+    font-style: italic;
+    color: var(--warm);
+  }
+
+  .what-right p {
+    font-size: 17px;
+    line-height: 1.85;
+    color: rgba(245,240,232,0.75);
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+
+  /* HOW IT WORKS */
+  .how {
+    padding: 120px 60px;
+    background: var(--mid);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 60px;
+  }
+
+  .step {
+    background: var(--black);
+    padding: 50px 40px;
+    position: relative;
+    transition: background 0.3s ease;
+  }
+
+  .step:hover { background: #111; }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    font-weight: 900;
+    color: rgba(212,82,42,0.15);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .step h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+
+  .step p {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(245,240,232,0.55);
+    font-weight: 300;
+  }
+
+  /* DIFFERENTIATORS */
+  .diff {
+    padding: 120px 60px;
+  }
+
+  .diff-list {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .diff-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    padding: 50px 0;
+    border-bottom: 1px solid rgba(245,240,232,0.08);
+    transition: all 0.3s ease;
+  }
+
+  .diff-item:first-child { border-top: 1px solid rgba(245,240,232,0.08); }
+
+  .diff-item:hover .diff-title { color: var(--warm); }
+
+  .diff-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    color: var(--accent);
+    padding-top: 4px;
+  }
+
+  .diff-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.2;
+    transition: color 0.3s ease;
+  }
+
+  .diff-desc {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.6);
+    font-weight: 300;
+    padding-top: 6px;
+  }
+
+  /* MVP ROADMAP */
+  .mvp {
+    padding: 120px 60px;
+    background: var(--cream);
+    color: var(--black);
+  }
+
+  .mvp .section-label { color: var(--accent); }
+
+  .mvp h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 80px;
+  }
+
+  .phase-tabs {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+
+  .phase-tab {
+    flex: 1;
+    padding: 20px 24px;
+    background: #e8e2d8;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.3s ease;
+    position: relative;
+  }
+
+  .phase-tab::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .phase-tab.active { background: white; }
+  .phase-tab.active::after { transform: scaleX(1); }
+  .phase-tab:hover { background: #ede8df; }
+  .phase-tab.active:hover { background: white; }
+
+  .phase-tab-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .phase-tab-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.2;
+  }
+
+  .phase-tab-months {
+    font-size: 11px;
+    color: #999;
+    margin-top: 4px;
+    display: block;
+  }
+
+  .phase-panel {
+    display: none;
+    background: white;
+    padding: 56px 48px;
+    animation: panelIn 0.4s ease;
+  }
+
+  .phase-panel.active { display: block; }
+
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .phase-panel-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .phase-panel h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .phase-panel p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: #555;
+    font-weight: 300;
+  }
+
+  .phase-panel ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 8px;
+  }
+
+  .phase-panel ul li {
+    font-size: 15px;
+    color: #333;
+    padding-left: 24px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .phase-panel ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 13px;
+  }
+
+  /* BUSINESS MODEL */
+  .biz {
+    padding: 120px 60px;
+    border-top: 1px solid rgba(245,240,232,0.08);
+  }
+
+  .biz-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 60px;
+    align-items: center;
+  }
+
+  .biz-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+
+  .biz-left p {
+    font-size: 16px;
+    line-height: 1.85;
+    color: rgba(245,240,232,0.65);
+    font-weight: 300;
+  }
+
+  .biz-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .biz-item {
+    background: var(--mid);
+    padding: 30px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .biz-item-label {
+    font-size: 15px;
+    color: rgba(245,240,232,0.7);
+  }
+
+  .biz-item-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--warm);
+  }
+
+  /* CITY STRATEGY */
+  .city {
+    padding: 120px 60px;
+    background: var(--accent);
+    text-align: center;
+  }
+
+  .city h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 6vw, 80px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 32px;
+  }
+
+  .city p {
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto 48px;
+    opacity: 0.85;
+    font-weight: 300;
+  }
+
+  .cities {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .city-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    cursor: default;
+  }
+
+  .city-name.active { opacity: 1; }
+  .city-name:hover { opacity: 0.9; }
+
+  /* FOOTER */
+  footer {
+    padding: 60px;
+    border-top: 1px solid rgba(245,240,232,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: rgba(245,240,232,0.3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 900px) {
+    .hero { padding: 60px 30px; }
+    .what, .how, .diff, .mvp, .biz, .city, .biz, footer { padding: 80px 30px; }
+    .what-grid, .biz-grid { grid-template-columns: 1fr; gap: 40px; }
+    .steps, .phases { grid-template-columns: 1fr; }
+    .diff-item { grid-template-columns: 50px 1fr; }
+    .diff-desc { grid-column: 2; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="tag">Jaime Lee &nbsp;·&nbsp; Company Overview</p>
+  <h1>Your home,<br><em>designed & done.</em></h1>
+  <p class="hero-sub">An AI-powered platform that takes your space from blank walls to a finished room — design, sourcing, delivery, and installation all in one.</p>
+  <div class="scroll-hint">Scroll to explore</div>
+</section>
+
+<!-- WHAT IT IS -->
+<section class="what">
+  <p class="section-label reveal">What It Is</p>
+  <div class="what-grid">
+    <div class="what-left reveal">
+      <h2>The <em>end-to-end</em> home design platform nobody built yet.</h2>
+    </div>
+    <div class="what-right reveal">
+      <p>An AI-powered platform built for your home. Whether moving into a new place or looking to renovate, it gives you the chance to see exactly what your space could look like before spending a single dollar.</p>
+      <p>You pick your style, your budget, your materials — and the platform handles everything else. Design, sourcing, delivery, and installation. All of it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <p class="section-label reveal">How It Works</p>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <h3>Scan Your Space</h3>
+      <p>A professional is sent out to scan your room using Canvas — a best-in-class 3D scanning tool — capturing exact dimensions with precision. No guesswork, no wrong-sized furniture showing up.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">02</div>
+      <h3>Pick Your Design</h3>
+      <p>The AI platform generates 3 to 5 fully realized design options based on your style preferences and budget. Filter by material, price range, aesthetic. Fall in love with one. Lock it in.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03</div>
+      <h3>One Day. Done.</h3>
+      <p>Everything ships together to a local staging point and arrives in a single delivery. Vetted, background-checked installers show up and bring the whole room to life. One appointment. Zero chaos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT MAKES IT DIFFERENT -->
+<section class="diff">
+  <p class="section-label reveal">What Makes It Different</p>
+  <div class="diff-list">
+
+    <div class="diff-item reveal">
+      <span class="diff-num">01</span>
+      <h3 class="diff-title">Canvas Partnership</h3>
+      <p class="diff-desc">Instead of relying on user-submitted measurements that are always slightly off, professional scanning techs use Canvas to capture precise 3D room data. The result is better data than any competitor has — and a design that actually fits.</p>
+    </div>
+
+    <div class="diff-item reveal">
+      <span class="diff-num">02</span>
+      <h3 class="diff-title">Vetted Installer Network</h3>
+      <p class="diff-desc">A curated, rated installer network — hyper-specialized for furniture and home finishing. Every job comes with a satisfaction guarantee. If the finished room doesn't match what was approved on screen, someone comes back at no charge. No competitor offers this.</p>
+    </div>
+
+    <div class="diff-item reveal">
+      <span class="diff-num">03</span>
+      <h3 class="diff-title">Wholesale Supplier Margins</h3>
+      <p class="diff-desc">Instead of just marking up retail prices, the platform partners directly with mid-size regional manufacturers — giving them a digital channel they'd never access otherwise. In exchange, wholesale pricing. Better margins, better value for customers.</p>
+    </div>
+
+    <div class="diff-item reveal">
+      <span class="diff-num">04</span>
+      <h3 class="diff-title">Single Room Delivery</h3>
+      <p class="diff-desc">Every item for a given room ships together, staged at a local partner facility, and gets delivered and installed in one appointment. No waiting on six deliveries over three weeks. One truck, one day, done. Operationally hard. Massively differentiating.</p>
+    </div>
+
+    <div class="diff-item reveal">
+      <span class="diff-num">05</span>
+      <h3 class="diff-title">Living Design Platform</h3>
+      <p class="diff-desc">After installation, the platform remembers every item in your home — dimensions, materials, colors, everything. It notifies you when something you own has a better version available, suggests seasonal refreshes, and gets smarter about your taste over time. A one-time transaction becomes a recurring relationship.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- MVP ROADMAP -->
+<section class="mvp">
+  <p class="section-label">The Roadmap</p>
+  <h2>MVP in 3 Phases</h2>
+  <!-- TABS -->
+  <div class="phase-tabs">
+    <button class="phase-tab active" onclick="switchPhase(0)">
+      <span class="phase-tab-label">Phase One</span>
+      <span class="phase-tab-title">Prove the Design Experience</span>
+      <span class="phase-tab-months">Months 1 — 3</span>
+    </button>
+    <button class="phase-tab" onclick="switchPhase(1)">
+      <span class="phase-tab-label">Phase Two</span>
+      <span class="phase-tab-title">Lock In Supply & Installation</span>
+      <span class="phase-tab-months">Months 3 — 6</span>
+    </button>
+    <button class="phase-tab" onclick="switchPhase(2)">
+      <span class="phase-tab-label">Phase Three</span>
+      <span class="phase-tab-title">The Living Design Platform</span>
+      <span class="phase-tab-months">Months 6 — 12</span>
+    </button>
+  </div>
+
+  <!-- PANELS -->
+  <div class="phase-panel active" id="phase-0">
+    <div class="phase-panel-inner">
+      <div>
+        <h3>Prove the Design Experience</h3>
+        <p>Before suppliers, installers, or logistics — show a customer a room and let them fall in love with a design. That's what makes them pull out a credit card. The first 5–10 orders get coordinated manually on purpose. You learn every pain point before automating anything.</p>
+      </div>
+      <ul>
+        <li>Web app where customers upload photos or a Canvas scan</li>
+        <li>AI generates 3–5 design options based on style and budget</li>
+        <li>Itemized quote + consultation request flow</li>
+        <li>Stripe for payments from day one</li>
+        <li>Manual fulfillment coordination behind the scenes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="phase-panel" id="phase-1">
+    <div class="phase-panel-inner">
+      <div>
+        <h3>Lock In Supply & Installation</h3>
+        <p>Real customer orders create real leverage. Go to 3–5 regional furniture manufacturers and negotiate wholesale deals. Simultaneously recruit and vet the first 10–15 installers in one target city. Do everything in one market first — don't spread thin. This phase ends when a full order can be fulfilled without personal management at every step.</p>
+      </div>
+      <ul>
+        <li>Wholesale pricing agreements with regional manufacturers</li>
+        <li>Vetted installer network in one metro area</li>
+        <li>Single-room delivery system — one truck, one day</li>
+        <li>Full order fulfillment without hand-holding</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="phase-panel" id="phase-2">
+    <div class="phase-panel-inner">
+      <div>
+        <h3>The Living Design Platform</h3>
+        <p>Now the sticky layer gets added. Every completed customer gets a full home profile in the app. Personalized refresh suggestions, seasonal updates, upgrade notifications. This is where recurring revenue kicks in — and where it starts looking like a real company to investors.</p>
+      </div>
+      <ul>
+        <li>Full home profile — every piece, material, and dimension stored</li>
+        <li>Upgrade and seasonal refresh push notifications</li>
+        <li>Taste profile that sharpens over time</li>
+        <li>Recurring revenue layer on top of one-time orders</li>
+        <li>Investor-ready story with compounding retention</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS MODEL -->
+<section class="biz">
+  <p class="section-label reveal">Business Model</p>
+  <div class="biz-grid">
+    <div class="biz-left reveal">
+      <h2>Simple.<br><em>Scalable.</em><br>Defensible.</h2>
+      <p>No inventory held. No contractors employed directly. Trusted suppliers and installation partners handle fulfillment. A small percentage is added on top of every order. As volume grows, so does the leverage to negotiate better wholesale rates — compressing costs while expanding margins.</p>
+    </div>
+    <div class="biz-right reveal">
+      <div class="biz-item">
+        <span class="biz-item-label">Primary Revenue</span>
+        <span class="biz-item-value">Take Rate on Orders</span>
+      </div>
+      <div class="biz-item">
+        <span class="biz-item-label">Secondary Revenue</span>
+        <span class="biz-item-value">Supplier Referral Fees</span>
+      </div>
+      <div class="biz-item">
+        <span class="biz-item-label">Recurring Revenue</span>
+        <span class="biz-item-value">Living Design Platform</span>
+      </div>
+      <div class="biz-item">
+        <span class="biz-item-label">Inventory Held</span>
+        <span class="biz-item-value">Zero</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CITY STRATEGY -->
+<section class="city">
+  <h2>One City.<br>First.</h2>
+  <p>Launch in one metro with high renovation activity. Own that market deeply — tight installer network, strong supplier relationships, controllable brand reputation — before expanding anywhere else.</p>
+  <div class="cities">
+    <span class="city-name active">Washington, D.C.</span>
+    <span class="city-name">Indianapolis</span>
+    <span class="city-name">McLean</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Confidential — Not for distribution</p>
+  <p>2026</p>
+</footer>
+
+<script>
+  // Phase tabs
+  function switchPhase(index) {
+    document.querySelectorAll('.phase-tab').forEach((t, i) => {
+      t.classList.toggle('active', i === index);
+    });
+    document.querySelectorAll('.phase-panel').forEach((p, i) => {
+      p.classList.toggle('active', i === index);
+    });
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // City cycling
+  const cityNames = document.querySelectorAll('.city-name');
+  let current = 0;
+  setInterval(() => {
+    cityNames[current].classList.remove('active');
+    current = (current + 1) % cityNames.length;
+    cityNames[current].classList.add('active');
+  }, 2000);
+</script>
+
+</body>
+</html>
