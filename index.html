@@ -3,726 +3,1262 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Future of Home Design</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>The Future of Home Design — Jaime Lee</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --black: #0a0a0a;
-    --cream: #f5f0e8;
-    --warm: #c8b89a;
-    --accent: #d4522a;
-    --mid: #2a2a2a;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--black);
-    color: var(--cream);
-    font-family: 'DM Sans', sans-serif;
-    overflow-x: hidden;
-  }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 60px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -200px; right: -200px;
-    width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(212,82,42,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -100px; left: -100px;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(200,184,154,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .tag {
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 32px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.2s;
-  }
-
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(52px, 8vw, 110px);
-    line-height: 1.0;
-    font-weight: 900;
-    max-width: 900px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.4s;
-  }
-
-  .hero h1 em {
-    font-style: italic;
-    color: var(--warm);
-  }
-
-  .hero-sub {
-    font-size: 18px;
-    color: rgba(245,240,232,0.6);
-    max-width: 520px;
-    line-height: 1.7;
-    margin-top: 36px;
-    font-weight: 300;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 0.6s;
-  }
-
-  .scroll-hint {
-    position: absolute;
-    bottom: 40px; left: 60px;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: rgba(245,240,232,0.3);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    opacity: 0;
-    animation: fadeUp 0.8s ease forwards 1s;
-  }
-
-  .scroll-hint::before {
-    content: '';
-    width: 40px; height: 1px;
-    background: rgba(245,240,232,0.3);
-  }
-
-  /* WHAT */
-  .what {
-    padding: 120px 60px;
-    border-top: 1px solid rgba(245,240,232,0.08);
-  }
-
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 60px;
-  }
-
-  .what-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .what-left h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 4vw, 58px);
-    line-height: 1.15;
-    font-weight: 700;
-  }
-
-  .what-left h2 em {
-    font-style: italic;
-    color: var(--warm);
-  }
-
-  .what-right p {
-    font-size: 17px;
-    line-height: 1.85;
-    color: rgba(245,240,232,0.75);
-    font-weight: 300;
-    margin-bottom: 24px;
-  }
-
-  /* HOW IT WORKS */
-  .how {
-    padding: 120px 60px;
-    background: var(--mid);
-  }
-
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin-top: 60px;
-  }
-
-  .step {
-    background: var(--black);
-    padding: 50px 40px;
-    position: relative;
-    transition: background 0.3s ease;
-  }
-
-  .step:hover { background: #111; }
-
-  .step-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 72px;
-    font-weight: 900;
-    color: rgba(212,82,42,0.15);
-    line-height: 1;
-    margin-bottom: 24px;
-  }
-
-  .step h3 {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 16px;
-    letter-spacing: -0.3px;
-  }
-
-  .step p {
-    font-size: 15px;
-    line-height: 1.75;
-    color: rgba(245,240,232,0.55);
-    font-weight: 300;
-  }
-
-  /* DIFFERENTIATORS */
-  .diff {
-    padding: 120px 60px;
-  }
-
-  .diff-list {
-    margin-top: 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .diff-item {
-    display: grid;
-    grid-template-columns: 80px 1fr 1fr;
-    gap: 40px;
-    align-items: start;
-    padding: 50px 0;
-    border-bottom: 1px solid rgba(245,240,232,0.08);
-    transition: all 0.3s ease;
-  }
-
-  .diff-item:first-child { border-top: 1px solid rgba(245,240,232,0.08); }
-
-  .diff-item:hover .diff-title { color: var(--warm); }
-
-  .diff-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    color: var(--accent);
-    padding-top: 4px;
-  }
-
-  .diff-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1.2;
-    transition: color 0.3s ease;
-  }
-
-  .diff-desc {
-    font-size: 15px;
-    line-height: 1.8;
-    color: rgba(245,240,232,0.6);
-    font-weight: 300;
-    padding-top: 6px;
-  }
-
-  /* MVP ROADMAP */
-  .mvp {
-    padding: 120px 60px;
-    background: var(--cream);
-    color: var(--black);
-  }
-
-  .mvp .section-label { color: var(--accent); }
-
-  .mvp h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 4vw, 58px);
-    font-weight: 900;
-    color: var(--black);
-    margin-bottom: 80px;
-  }
-
-  .phase-tabs {
-    display: flex;
-    gap: 2px;
-    margin-bottom: 2px;
-  }
-
-  .phase-tab {
-    flex: 1;
-    padding: 20px 24px;
-    background: #e8e2d8;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    transition: background 0.3s ease;
-    position: relative;
-  }
-
-  .phase-tab::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-  }
-
-  .phase-tab.active { background: white; }
-  .phase-tab.active::after { transform: scaleX(1); }
-  .phase-tab:hover { background: #ede8df; }
-  .phase-tab.active:hover { background: white; }
-
-  .phase-tab-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 6px;
-  }
-
-  .phase-tab-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--black);
-    line-height: 1.2;
-  }
-
-  .phase-tab-months {
-    font-size: 11px;
-    color: #999;
-    margin-top: 4px;
-    display: block;
-  }
-
-  .phase-panel {
-    display: none;
-    background: white;
-    padding: 56px 48px;
-    animation: panelIn 0.4s ease;
-  }
-
-  .phase-panel.active { display: block; }
-
-  @keyframes panelIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .phase-panel-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: start;
-  }
-
-  .phase-panel h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--black);
-    margin-bottom: 20px;
-    line-height: 1.2;
-  }
-
-  .phase-panel p {
-    font-size: 16px;
-    line-height: 1.85;
-    color: #555;
-    font-weight: 300;
-  }
-
-  .phase-panel ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding-top: 8px;
-  }
-
-  .phase-panel ul li {
-    font-size: 15px;
-    color: #333;
-    padding-left: 24px;
-    position: relative;
-    line-height: 1.6;
-  }
-
-  .phase-panel ul li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 13px;
-  }
-
-  /* BUSINESS MODEL */
-  .biz {
-    padding: 120px 60px;
-    border-top: 1px solid rgba(245,240,232,0.08);
-  }
-
-  .biz-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    margin-top: 60px;
-    align-items: center;
-  }
-
-  .biz-left h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 4vw, 52px);
-    line-height: 1.15;
-    margin-bottom: 24px;
-  }
-
-  .biz-left p {
-    font-size: 16px;
-    line-height: 1.85;
-    color: rgba(245,240,232,0.65);
-    font-weight: 300;
-  }
-
-  .biz-right {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .biz-item {
-    background: var(--mid);
-    padding: 30px 36px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .biz-item-label {
-    font-size: 15px;
-    color: rgba(245,240,232,0.7);
-  }
-
-  .biz-item-value {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--warm);
-  }
-
-  /* CITY STRATEGY */
-  .city {
-    padding: 120px 60px;
-    background: var(--accent);
-    text-align: center;
-  }
-
-  .city h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(42px, 6vw, 80px);
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 32px;
-  }
-
-  .city p {
-    font-size: 18px;
-    line-height: 1.8;
-    max-width: 600px;
-    margin: 0 auto 48px;
-    opacity: 0.85;
-    font-weight: 300;
-  }
-
-  .cities {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-  }
-
-  .city-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 700;
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
-    cursor: default;
-  }
-
-  .city-name.active { opacity: 1; }
-  .city-name:hover { opacity: 0.9; }
-
-  /* CONTACT */
-  .contact {
-    padding: 120px 60px;
-    background: var(--mid);
-    border-top: 1px solid rgba(245,240,232,0.08);
-  }
-
-  .contact-inner {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 80px;
-    align-items: start;
-  }
-
-  .contact-left h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(36px, 4vw, 54px);
-    line-height: 1.15;
-    font-weight: 700;
-    margin-bottom: 20px;
-  }
-
-  .contact-left h2 em {
-    font-style: italic;
-    color: var(--warm);
-  }
-
-  .contact-sub {
-    font-size: 16px;
-    line-height: 1.8;
-    color: rgba(245,240,232,0.6);
-    font-weight: 300;
-    margin-top: 8px;
-  }
-
-  /* CONTACT */
-  .contact {
-    padding: 120px 60px;
-    background: var(--black);
-    border-top: 1px solid rgba(245,240,232,0.08);
-    text-align: center;
-  }
-
-  .contact-inner {
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contact-inner h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(42px, 5vw, 68px);
-    line-height: 1.1;
-    font-weight: 900;
-    margin-bottom: 24px;
-  }
-
-  .contact-inner h2 em {
-    font-style: italic;
-    color: var(--warm);
-  }
-
-  .contact-sub {
-    font-size: 17px;
-    line-height: 1.8;
-    color: rgba(245,240,232,0.55);
-    font-weight: 300;
-    margin-bottom: 48px;
-  }
-
-  .contact-email {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(20px, 2.5vw, 30px);
-    color: var(--cream);
-    text-decoration: none;
-    border-bottom: 1px solid var(--warm);
-    padding-bottom: 6px;
-    transition: color 0.3s ease, border-color 0.3s ease;
-    letter-spacing: 0.5px;
-  }
-
-  .contact-email:hover {
-    color: var(--warm);
-    border-color: var(--cream);
-  }
-
-  .email-bar {
-    display: none;
-  }
-
-  /* FOOTER */
-  footer {
-    padding: 60px;
-    border-top: 1px solid rgba(245,240,232,0.08);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  footer p {
-    font-size: 13px;
-    color: rgba(245,240,232,0.3);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (max-width: 900px) {
-    .hero { padding: 60px 30px; }
-    .what, .how, .diff, .mvp, .biz, .city, .contact, footer { padding: 80px 30px; }
-    .what-grid, .biz-grid { grid-template-columns: 1fr; gap: 40px; }
-    .steps, .phases { grid-template-columns: 1fr; }
-    .diff-item { grid-template-columns: 50px 1fr; }
-    .diff-desc { grid-column: 2; }
-    footer { flex-direction: column; gap: 20px; text-align: center; }
-  }
+:root {
+  --black: #080808;
+  --cream: #f2ede4;
+  --warm: #c9a96e;
+  --accent: #c8412b;
+  --mid: #111111;
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'Outfit', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, opacity 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  position: fixed;
+  width: 40px; height: 40px;
+  border: 1px solid rgba(200,65,43,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.12s ease;
+}
+body:hover .cursor { opacity: 1; }
+
+/* GRAIN OVERLAY */
+.grain {
+  position: fixed;
+  inset: -200%;
+  width: 400%; height: 400%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9990;
+  animation: grain 0.4s steps(1) infinite;
+}
+@keyframes grain {
+  0%,100% { transform: translate(0,0); }
+  10% { transform: translate(-3%,-3%); }
+  20% { transform: translate(3%,3%); }
+  30% { transform: translate(-3%,3%); }
+  40% { transform: translate(3%,-3%); }
+  50% { transform: translate(-5%,2%); }
+  60% { transform: translate(5%,-2%); }
+  70% { transform: translate(-2%,5%); }
+  80% { transform: translate(2%,-5%); }
+  90% { transform: translate(-4%,4%); }
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 28px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: normal;
+}
+nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(8,8,8,0.8), transparent);
+  backdrop-filter: blur(0px);
+  pointer-events: none;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  position: relative;
+  z-index: 1;
+}
+.nav-links a {
+  font-size: 12px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(242,237,228,0.5);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-weight: 300;
+}
+.nav-links a:hover { color: var(--cream); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 60px 80px;
+}
+
+/* Aurora background */
+.aurora {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  animation: float 20s ease-in-out infinite;
+}
+.aurora-blob:nth-child(1) {
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, #c8412b 0%, transparent 70%);
+  top: -200px; right: -100px;
+  animation-delay: 0s;
+}
+.aurora-blob:nth-child(2) {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #c9a96e 0%, transparent 70%);
+  bottom: 0; left: -100px;
+  opacity: 0.2;
+  animation-delay: -8s;
+}
+.aurora-blob:nth-child(3) {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #4a2060 0%, transparent 70%);
+  top: 30%; left: 40%;
+  opacity: 0.15;
+  animation-delay: -14s;
+}
+@keyframes float {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33% { transform: translate(40px,-40px) scale(1.05); }
+  66% { transform: translate(-30px,30px) scale(0.95); }
+}
+
+/* Grid lines */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: slideRight 0.9s cubic-bezier(0.16,1,0.3,1) forwards 0.3s;
+}
+.hero-eyebrow-line {
+  width: 50px; height: 1px;
+  background: var(--accent);
+}
+.hero-eyebrow-text {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(70px, 10vw, 160px);
+  line-height: 0.9;
+  font-weight: 300;
+  letter-spacing: -2px;
+  opacity: 0;
+  animation: slideUp 1s cubic-bezier(0.16,1,0.3,1) forwards 0.5s;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--warm);
+  display: block;
+}
+.hero-title .outline-text {
+  -webkit-text-stroke: 1px rgba(242,237,228,0.3);
+  color: transparent;
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 60px;
+  opacity: 0;
+  animation: slideUp 1s cubic-bezier(0.16,1,0.3,1) forwards 0.8s;
+}
+.hero-desc {
+  font-size: 17px;
+  line-height: 1.8;
+  color: rgba(242,237,228,0.55);
+  max-width: 420px;
+  font-weight: 300;
+}
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 36px;
+  background: var(--accent);
+  color: white;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  cursor: none;
+}
+.cta-btn:hover {
+  background: #d44f38;
+  gap: 20px;
+}
+.cta-btn svg { transition: transform 0.3s ease; }
+.cta-btn:hover svg { transform: translateX(4px); }
+.cta-ghost {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(242,237,228,0.35);
+  font-weight: 300;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards 1.4s;
+}
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-text {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(242,237,228,0.25);
+  writing-mode: vertical-rl;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 1; transform: scaleY(1); }
+  50% { opacity: 0.4; transform: scaleY(0.7); }
+}
+
+/* STATS BAR */
+.stats-bar {
+  padding: 40px 60px;
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--glass-border);
+}
+.stat {
+  background: var(--black);
+  padding: 36px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--cream);
+}
+.stat-value span {
+  font-size: 28px;
+  color: var(--accent);
+}
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(242,237,228,0.35);
+  font-weight: 300;
+}
+
+/* WHAT SECTION */
+.what {
+  padding: 160px 60px;
+  position: relative;
+}
+.section-tag {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 80px;
+}
+.section-tag-line {
+  width: 30px; height: 1px;
+  background: var(--accent);
+}
+.section-tag-text {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+.what-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 120px;
+  align-items: center;
+}
+.what-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 5vw, 72px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+.what-headline em {
+  font-style: italic;
+  color: var(--warm);
+}
+.what-right {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.what-right p {
+  font-size: 16px;
+  line-height: 1.9;
+  color: rgba(242,237,228,0.6);
+  font-weight: 300;
+}
+.what-feature {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 24px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.what-feature:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.15);
+}
+.what-feature-icon {
+  width: 40px; height: 40px;
+  background: rgba(200,65,43,0.15);
+  border: 1px solid rgba(200,65,43,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+.what-feature-text h4 {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+.what-feature-text p {
+  font-size: 13px;
+  color: rgba(242,237,228,0.45);
+  line-height: 1.7;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* HOW IT WORKS */
+.how {
+  padding: 160px 60px;
+  background: #0c0c0c;
+  position: relative;
+  overflow: hidden;
+}
+.how::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(200,65,43,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.how-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 80px;
+}
+.how-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5vw, 68px);
+  font-weight: 300;
+  line-height: 1.1;
+  max-width: 500px;
+}
+.how-headline em { font-style: italic; color: var(--warm); }
+.how-sub {
+  font-size: 14px;
+  color: rgba(242,237,228,0.4);
+  max-width: 280px;
+  line-height: 1.8;
+  font-weight: 300;
+  text-align: right;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.step {
+  background: var(--black);
+  padding: 56px 44px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.4s ease;
+  cursor: none;
+}
+.step::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--accent), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.step:hover { background: #0f0f0f; }
+.step:hover::before { transform: scaleX(1); }
+
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 100px;
+  font-weight: 300;
+  line-height: 1;
+  color: rgba(200,65,43,0.08);
+  position: absolute;
+  top: 20px; right: 30px;
+  letter-spacing: -4px;
+  transition: color 0.4s ease;
+}
+.step:hover .step-num { color: rgba(200,65,43,0.15); }
+.step-icon {
+  width: 52px; height: 52px;
+  border: 1px solid rgba(200,65,43,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  margin-bottom: 32px;
+  background: rgba(200,65,43,0.05);
+  transition: all 0.4s ease;
+}
+.step:hover .step-icon {
+  background: rgba(200,65,43,0.15);
+  border-color: var(--accent);
+}
+.step h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  letter-spacing: -0.3px;
+}
+.step p {
+  font-size: 14px;
+  line-height: 1.85;
+  color: rgba(242,237,228,0.5);
+  font-weight: 300;
+}
+
+/* DIFFERENTIATORS */
+.diff {
+  padding: 160px 60px;
+}
+.diff-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 120px;
+  align-items: start;
+}
+.diff-sticky {
+  position: sticky;
+  top: 120px;
+}
+.diff-sticky h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+.diff-sticky h2 em { font-style: italic; color: var(--warm); }
+.diff-sticky p {
+  font-size: 14px;
+  color: rgba(242,237,228,0.4);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.diff-list {
+  display: flex;
+  flex-direction: column;
+}
+.diff-item {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--glass-border);
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 32px;
+  align-items: start;
+  transition: all 0.3s ease;
+  cursor: none;
+}
+.diff-item:first-child { border-top: 1px solid var(--glass-border); }
+.diff-item:hover .diff-title { color: var(--warm); }
+.diff-item:hover .diff-num { color: var(--accent); opacity: 1; }
+
+.diff-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--accent);
+  opacity: 0.5;
+  padding-top: 8px;
+  transition: opacity 0.3s ease;
+  letter-spacing: 2px;
+}
+.diff-content {}
+.diff-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+  letter-spacing: -0.5px;
+}
+.diff-desc {
+  font-size: 14px;
+  line-height: 1.9;
+  color: rgba(242,237,228,0.5);
+  font-weight: 300;
+}
+
+/* ROADMAP */
+.mvp {
+  padding: 160px 60px;
+  background: var(--cream);
+  color: var(--black);
+  position: relative;
+  overflow: hidden;
+}
+.mvp::before {
+  content: 'ROADMAP';
+  position: absolute;
+  bottom: -40px; right: -20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 200px;
+  font-weight: 700;
+  color: rgba(8,8,8,0.04);
+  letter-spacing: -8px;
+  pointer-events: none;
+  line-height: 1;
+}
+.mvp .section-tag-line { background: var(--accent); }
+.mvp .section-tag-text { color: var(--accent); }
+
+.mvp-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 80px;
+}
+.mvp h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 6vw, 88px);
+  font-weight: 300;
+  color: var(--black);
+  line-height: 0.95;
+  letter-spacing: -2px;
+}
+.mvp-intro {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(8,8,8,0.5);
+  font-weight: 300;
+  align-self: end;
+  padding-bottom: 8px;
+}
+
+.phase-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 2px;
+}
+.phase-tab {
+  padding: 28px 32px;
+  background: #e4dfd5;
+  border: none;
+  cursor: none;
+  text-align: left;
+  transition: background 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Outfit', sans-serif;
+}
+.phase-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.phase-tab.active { background: white; }
+.phase-tab.active::after { transform: scaleX(1); }
+.phase-tab:hover:not(.active) { background: #ece7dd; }
+.phase-tab-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+.phase-tab-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--black);
+  line-height: 1.3;
+  display: block;
+}
+.phase-tab-months {
+  font-size: 10px;
+  color: #999;
+  margin-top: 6px;
+  display: block;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.phase-panel {
+  display: none;
+  background: white;
+  padding: 64px 56px;
+  animation: panelIn 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.phase-panel.active { display: block; }
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.phase-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+.phase-panel h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+.phase-panel > .phase-inner > div:first-child p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(8,8,8,0.55);
+  font-weight: 300;
+}
+.phase-panel ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.phase-panel ul li {
+  font-size: 14px;
+  color: rgba(8,8,8,0.7);
+  padding: 18px 0 18px 24px;
+  position: relative;
+  border-bottom: 1px solid rgba(8,8,8,0.06);
+  font-weight: 300;
+  line-height: 1.6;
+  transition: color 0.2s ease;
+}
+.phase-panel ul li:first-child { border-top: 1px solid rgba(8,8,8,0.06); }
+.phase-panel ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 12px;
+}
+.phase-panel ul li:hover { color: var(--black); }
+
+/* BUSINESS MODEL */
+.biz {
+  padding: 160px 60px;
+  border-top: 1px solid var(--glass-border);
+}
+.biz-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+.biz-left h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(42px, 4vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 28px;
+  letter-spacing: -1px;
+}
+.biz-left h2 em { font-style: italic; color: var(--warm); }
+.biz-left p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(242,237,228,0.5);
+  font-weight: 300;
+}
+.biz-items {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.biz-item {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  padding: 28px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  backdrop-filter: blur(20px);
+}
+.biz-item:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.15);
+}
+.biz-label {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: rgba(242,237,228,0.4);
+  font-weight: 300;
+}
+.biz-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--warm);
+  letter-spacing: 0.3px;
+}
+
+/* CITY */
+.city {
+  padding: 160px 60px;
+  background: var(--accent);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.city::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center top, rgba(255,255,255,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+.city-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 48px;
+}
+.city-eyebrow-line {
+  width: 30px; height: 1px;
+  background: rgba(255,255,255,0.4);
+}
+.city-eyebrow-text {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+}
+.city h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(60px, 9vw, 130px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -4px;
+  margin-bottom: 40px;
+}
+.city p {
+  font-size: 17px;
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 0 auto 60px;
+  opacity: 0.75;
+  font-weight: 300;
+}
+.city-names {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+.city-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 400;
+  opacity: 0.35;
+  transition: all 0.5s ease;
+  padding: 12px 36px;
+  border: 1px solid rgba(255,255,255,0.15);
+  letter-spacing: 1px;
+  cursor: none;
+}
+.city-name + .city-name { border-left: none; }
+.city-name.active {
+  opacity: 1;
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+}
+.city-name:hover { opacity: 0.75; }
+
+/* CONTACT */
+.contact {
+  padding: 160px 60px;
+  background: var(--black);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.contact::before {
+  content: '';
+  position: absolute;
+  bottom: -200px; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 600px;
+  background: radial-gradient(ellipse, rgba(200,65,43,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.contact-inner {
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.contact-inner h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 7vw, 100px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -2px;
+  margin-bottom: 32px;
+}
+.contact-inner h2 em { font-style: italic; color: var(--warm); }
+.contact-sub {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(242,237,228,0.45);
+  font-weight: 300;
+  margin-bottom: 56px;
+}
+.contact-email {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 3vw, 36px);
+  color: var(--cream);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 8px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+.contact-email::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--warm), var(--accent));
+  transition: transform 0.4s ease;
+  transform-origin: left;
+}
+.contact-email:hover { color: var(--warm); }
+.contact-email:hover::after { transform: scaleX(1.05); }
+
+/* FOOTER */
+footer {
+  padding: 40px 60px;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer p {
+  font-size: 11px;
+  color: rgba(242,237,228,0.2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+/* ANIMATIONS */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+@media (max-width: 1000px) {
+  nav { padding: 24px 30px; }
+  .nav-links { display: none; }
+  .hero { padding: 0 30px 60px; }
+  .hero-title { font-size: clamp(52px, 12vw, 100px); }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .stats-bar { grid-template-columns: repeat(2,1fr); }
+  .what, .how, .diff, .mvp, .biz, .city, .contact { padding: 100px 30px; }
+  .what-layout, .biz-layout { grid-template-columns: 1fr; gap: 60px; }
+  .steps { grid-template-columns: 1fr; }
+  .diff-grid { grid-template-columns: 1fr; gap: 60px; }
+  .diff-sticky { position: static; }
+  .mvp-header { grid-template-columns: 1fr; gap: 32px; }
+  .phase-tabs { grid-template-columns: 1fr; }
+  .phase-inner { grid-template-columns: 1fr; gap: 40px; }
+  .city-names { flex-direction: column; align-items: center; }
+  .city-name + .city-name { border-left: 1px solid rgba(255,255,255,0.15); border-top: none; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+}
 </style>
 </head>
 <body>
 
+<div class="grain"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">JL Studio</div>
+  <ul class="nav-links">
+    <li><a href="#what">About</a></li>
+    <li><a href="#how">Process</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
 <!-- HERO -->
 <section class="hero">
-  <p class="tag">Jaime Lee &nbsp;·&nbsp; Company Overview</p>
-  <h1>Your home,<br><em>designed & done.</em></h1>
-  <p class="hero-sub">An AI-powered platform that takes your space from blank walls to a finished room — design, sourcing, delivery, and installation all in one.</p>
-  <div class="scroll-hint">Scroll to explore</div>
+  <div class="aurora">
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+    <div class="aurora-blob"></div>
+  </div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Jaime Lee &nbsp;·&nbsp; Company Overview &nbsp;·&nbsp; 2026</span>
+    </div>
+    <h1 class="hero-title">
+      Your home,<br>
+      <em>designed.</em><br>
+      <span class="outline-text">& done.</span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">An AI-powered platform that takes your space from blank walls to a finished room — design, sourcing, delivery, and installation all in one appointment.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="cta-btn">
+          Get In Touch
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <span class="cta-ghost">Confidential — Not for distribution</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
 </section>
 
-<!-- WHAT IT IS -->
-<section class="what">
-  <p class="section-label reveal">What It Is</p>
-  <div class="what-grid">
-    <div class="what-left reveal">
-      <h2>The <em>end-to-end</em> home design platform nobody built yet.</h2>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat reveal">
+    <span class="stat-value">3<span>hrs</span></span>
+    <span class="stat-label">Average design session</span>
+  </div>
+  <div class="stat reveal reveal-delay-1">
+    <span class="stat-value">1<span>day</span></span>
+    <span class="stat-label">From delivery to done</span>
+  </div>
+  <div class="stat reveal reveal-delay-2">
+    <span class="stat-value">0<span>%</span></span>
+    <span class="stat-label">Inventory held</span>
+  </div>
+  <div class="stat reveal reveal-delay-3">
+    <span class="stat-value">3<span>x</span></span>
+    <span class="stat-label">Avg. competitor markup</span>
+  </div>
+</div>
+
+<!-- WHAT -->
+<section class="what" id="what">
+  <div class="section-tag reveal">
+    <div class="section-tag-line"></div>
+    <span class="section-tag-text">What It Is</span>
+  </div>
+  <div class="what-layout">
+    <div class="reveal">
+      <h2 class="what-headline">The <em>end-to-end</em> home design platform nobody built yet.</h2>
     </div>
-    <div class="what-right reveal">
+    <div class="what-right reveal reveal-delay-1">
       <p>An AI-powered platform built for your home. Whether moving into a new place or looking to renovate, it gives you the chance to see exactly what your space could look like before spending a single dollar.</p>
-      <p>You pick your style, your budget, your materials — and the platform handles everything else. Design, sourcing, delivery, and installation. All of it.</p>
+      <div class="what-feature">
+        <div class="what-feature-icon">🏠</div>
+        <div class="what-feature-text">
+          <h4>AI-Generated Designs</h4>
+          <p>3–5 fully realized design options generated instantly based on your style and budget.</p>
+        </div>
+      </div>
+      <div class="what-feature">
+        <div class="what-feature-icon">📦</div>
+        <div class="what-feature-text">
+          <h4>Single-Day Fulfillment</h4>
+          <p>Everything ships together and installs in one appointment. One truck, one day, done.</p>
+        </div>
+      </div>
+      <div class="what-feature">
+        <div class="what-feature-icon">🔄</div>
+        <div class="what-feature-text">
+          <h4>Living Platform</h4>
+          <p>After install, the platform remembers your home and keeps improving your space over time.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- HOW IT WORKS -->
-<section class="how">
-  <p class="section-label reveal">How It Works</p>
+<section class="how" id="how">
+  <div class="how-header reveal">
+    <div>
+      <div class="section-tag" style="margin-bottom: 32px;">
+        <div class="section-tag-line"></div>
+        <span class="section-tag-text">How It Works</span>
+      </div>
+      <h2 class="how-headline">Three steps to a <em>finished room.</em></h2>
+    </div>
+    <p class="how-sub">A streamlined process designed to eliminate every friction point between you and your ideal home.</p>
+  </div>
   <div class="steps">
     <div class="step reveal">
       <div class="step-num">01</div>
+      <div class="step-icon">📐</div>
       <h3>Scan Your Space</h3>
       <p>A professional is sent out to scan your room using Canvas — a best-in-class 3D scanning tool — capturing exact dimensions with precision. No guesswork, no wrong-sized furniture showing up.</p>
     </div>
-    <div class="step reveal">
+    <div class="step reveal reveal-delay-1">
       <div class="step-num">02</div>
+      <div class="step-icon">✨</div>
       <h3>Pick Your Design</h3>
       <p>The AI platform generates 3 to 5 fully realized design options based on your style preferences and budget. Filter by material, price range, aesthetic. Fall in love with one. Lock it in.</p>
     </div>
-    <div class="step reveal">
+    <div class="step reveal reveal-delay-2">
       <div class="step-num">03</div>
+      <div class="step-icon">🚀</div>
       <h3>One Day. Done.</h3>
       <p>Everything ships together to a local staging point and arrives in a single delivery. Vetted, background-checked installers show up and bring the whole room to life. One appointment. Zero chaos.</p>
     </div>
   </div>
 </section>
 
-<!-- WHAT MAKES IT DIFFERENT -->
+<!-- DIFFERENTIATORS -->
 <section class="diff">
-  <p class="section-label reveal">What Makes It Different</p>
-  <div class="diff-list">
-
-    <div class="diff-item reveal">
-      <span class="diff-num">01</span>
-      <h3 class="diff-title">Canvas Partnership</h3>
-      <p class="diff-desc">Instead of relying on user-submitted measurements that are always slightly off, professional scanning techs use Canvas to capture precise 3D room data. The result is better data than any competitor has — and a design that actually fits.</p>
+  <div class="section-tag reveal">
+    <div class="section-tag-line"></div>
+    <span class="section-tag-text">What Makes It Different</span>
+  </div>
+  <div class="diff-grid">
+    <div class="diff-sticky reveal">
+      <h2>Five<br><em>moats.</em></h2>
+      <p>Each differentiator compounds the others. Together they build something no competitor can copy quickly.</p>
     </div>
-
-    <div class="diff-item reveal">
-      <span class="diff-num">02</span>
-      <h3 class="diff-title">Vetted Installer Network</h3>
-      <p class="diff-desc">A curated, rated installer network — hyper-specialized for furniture and home finishing. Every job comes with a satisfaction guarantee. If the finished room doesn't match what was approved on screen, someone comes back at no charge. No competitor offers this.</p>
+    <div class="diff-list">
+      <div class="diff-item reveal">
+        <span class="diff-num">01</span>
+        <div class="diff-content">
+          <h3 class="diff-title">Canvas Partnership</h3>
+          <p class="diff-desc">Instead of relying on user-submitted measurements that are always slightly off, professional scanning techs use Canvas to capture precise 3D room data. The result is better data than any competitor has — and a design that actually fits.</p>
+        </div>
+      </div>
+      <div class="diff-item reveal">
+        <span class="diff-num">02</span>
+        <div class="diff-content">
+          <h3 class="diff-title">Vetted Installer Network</h3>
+          <p class="diff-desc">A curated, rated installer network — hyper-specialized for furniture and home finishing. Every job comes with a satisfaction guarantee. If the finished room doesn't match what was approved on screen, someone comes back at no charge.</p>
+        </div>
+      </div>
+      <div class="diff-item reveal">
+        <span class="diff-num">03</span>
+        <div class="diff-content">
+          <h3 class="diff-title">Wholesale Supplier Margins</h3>
+          <p class="diff-desc">Instead of just marking up retail prices, the platform partners directly with mid-size regional manufacturers — giving them a digital channel they'd never access otherwise. In exchange, wholesale pricing. Better margins, better value.</p>
+        </div>
+      </div>
+      <div class="diff-item reveal">
+        <span class="diff-num">04</span>
+        <div class="diff-content">
+          <h3 class="diff-title">Single Room Delivery</h3>
+          <p class="diff-desc">Every item for a given room ships together, staged at a local partner facility, and gets delivered and installed in one appointment. No waiting on six deliveries over three weeks. One truck, one day, done.</p>
+        </div>
+      </div>
+      <div class="diff-item reveal">
+        <span class="diff-num">05</span>
+        <div class="diff-content">
+          <h3 class="diff-title">Living Design Platform</h3>
+          <p class="diff-desc">After installation, the platform remembers every item in your home. It notifies you when something you own has a better version available, suggests seasonal refreshes, and gets smarter about your taste over time.</p>
+        </div>
+      </div>
     </div>
-
-    <div class="diff-item reveal">
-      <span class="diff-num">03</span>
-      <h3 class="diff-title">Wholesale Supplier Margins</h3>
-      <p class="diff-desc">Instead of just marking up retail prices, the platform partners directly with mid-size regional manufacturers — giving them a digital channel they'd never access otherwise. In exchange, wholesale pricing. Better margins, better value for customers.</p>
-    </div>
-
-    <div class="diff-item reveal">
-      <span class="diff-num">04</span>
-      <h3 class="diff-title">Single Room Delivery</h3>
-      <p class="diff-desc">Every item for a given room ships together, staged at a local partner facility, and gets delivered and installed in one appointment. No waiting on six deliveries over three weeks. One truck, one day, done. Operationally hard. Massively differentiating.</p>
-    </div>
-
-    <div class="diff-item reveal">
-      <span class="diff-num">05</span>
-      <h3 class="diff-title">Living Design Platform</h3>
-      <p class="diff-desc">After installation, the platform remembers every item in your home — dimensions, materials, colors, everything. It notifies you when something you own has a better version available, suggests seasonal refreshes, and gets smarter about your taste over time. A one-time transaction becomes a recurring relationship.</p>
-    </div>
-
   </div>
 </section>
 
-<!-- MVP ROADMAP -->
-<section class="mvp">
-  <p class="section-label">The Roadmap</p>
-  <h2>MVP in 3 Phases</h2>
-  <!-- TABS -->
+<!-- ROADMAP -->
+<section class="mvp" id="roadmap">
+  <div class="section-tag reveal">
+    <div class="section-tag-line"></div>
+    <span class="section-tag-text">The Roadmap</span>
+  </div>
+  <div class="mvp-header">
+    <h2 class="reveal">MVP in<br>3 Phases</h2>
+    <p class="mvp-intro reveal reveal-delay-1">A deliberate, sequenced build. Each phase proves something different before spending on the next. No premature scaling.</p>
+  </div>
   <div class="phase-tabs">
     <button class="phase-tab active" onclick="switchPhase(0)">
       <span class="phase-tab-label">Phase One</span>
       <span class="phase-tab-title">Prove the Design Experience</span>
-      <span class="phase-tab-months">Months 1 — 3</span>
+      <span class="phase-tab-months">Months 1–3</span>
     </button>
     <button class="phase-tab" onclick="switchPhase(1)">
       <span class="phase-tab-label">Phase Two</span>
       <span class="phase-tab-title">Lock In Supply & Installation</span>
-      <span class="phase-tab-months">Months 3 — 6</span>
+      <span class="phase-tab-months">Months 3–6</span>
     </button>
     <button class="phase-tab" onclick="switchPhase(2)">
       <span class="phase-tab-label">Phase Three</span>
       <span class="phase-tab-title">The Living Design Platform</span>
-      <span class="phase-tab-months">Months 6 — 12</span>
+      <span class="phase-tab-months">Months 6–12</span>
     </button>
   </div>
-
-  <!-- PANELS -->
   <div class="phase-panel active" id="phase-0">
-    <div class="phase-panel-inner">
+    <div class="phase-inner">
       <div>
         <h3>Prove the Design Experience</h3>
         <p>Before suppliers, installers, or logistics — show a customer a room and let them fall in love with a design. That's what makes them pull out a credit card. The first 5–10 orders get coordinated manually on purpose. You learn every pain point before automating anything.</p>
@@ -736,12 +1272,11 @@
       </ul>
     </div>
   </div>
-
   <div class="phase-panel" id="phase-1">
-    <div class="phase-panel-inner">
+    <div class="phase-inner">
       <div>
         <h3>Lock In Supply & Installation</h3>
-        <p>Real customer orders create real leverage. Go to 3–5 regional furniture manufacturers and negotiate wholesale deals. Simultaneously recruit and vet the first 10–15 installers in one target city. Do everything in one market first — don't spread thin. This phase ends when a full order can be fulfilled without personal management at every step.</p>
+        <p>Real customer orders create real leverage. Go to 3–5 regional furniture manufacturers and negotiate wholesale deals. Simultaneously recruit and vet the first 10–15 installers in one target city. Do everything in one market first — don't spread thin.</p>
       </div>
       <ul>
         <li>Wholesale pricing agreements with regional manufacturers</li>
@@ -751,9 +1286,8 @@
       </ul>
     </div>
   </div>
-
   <div class="phase-panel" id="phase-2">
-    <div class="phase-panel-inner">
+    <div class="phase-inner">
       <div>
         <h3>The Living Design Platform</h3>
         <p>Now the sticky layer gets added. Every completed customer gets a full home profile in the app. Personalized refresh suggestions, seasonal updates, upgrade notifications. This is where recurring revenue kicks in — and where it starts looking like a real company to investors.</p>
@@ -771,38 +1305,46 @@
 
 <!-- BUSINESS MODEL -->
 <section class="biz">
-  <p class="section-label reveal">Business Model</p>
-  <div class="biz-grid">
-    <div class="biz-left reveal">
+  <div class="section-tag reveal">
+    <div class="section-tag-line"></div>
+    <span class="section-tag-text">Business Model</span>
+  </div>
+  <div class="biz-layout">
+    <div class="reveal">
       <h2>Simple.<br><em>Scalable.</em><br>Defensible.</h2>
       <p>No inventory held. No contractors employed directly. Trusted suppliers and installation partners handle fulfillment. A small percentage is added on top of every order. As volume grows, so does the leverage to negotiate better wholesale rates — compressing costs while expanding margins.</p>
     </div>
-    <div class="biz-right reveal">
+    <div class="biz-items reveal reveal-delay-1">
       <div class="biz-item">
-        <span class="biz-item-label">Primary Revenue</span>
-        <span class="biz-item-value">Take Rate on Orders</span>
+        <span class="biz-label">Primary Revenue</span>
+        <span class="biz-value">Take Rate on Orders</span>
       </div>
       <div class="biz-item">
-        <span class="biz-item-label">Secondary Revenue</span>
-        <span class="biz-item-value">Supplier Referral Fees</span>
+        <span class="biz-label">Secondary Revenue</span>
+        <span class="biz-value">Supplier Referral Fees</span>
       </div>
       <div class="biz-item">
-        <span class="biz-item-label">Recurring Revenue</span>
-        <span class="biz-item-value">Living Design Platform</span>
+        <span class="biz-label">Recurring Revenue</span>
+        <span class="biz-value">Living Design Platform</span>
       </div>
       <div class="biz-item">
-        <span class="biz-item-label">Inventory Held</span>
-        <span class="biz-item-value">Zero</span>
+        <span class="biz-label">Inventory Held</span>
+        <span class="biz-value">Zero</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CITY STRATEGY -->
+<!-- CITY -->
 <section class="city">
+  <div class="city-eyebrow">
+    <div class="city-eyebrow-line"></div>
+    <span class="city-eyebrow-text">Launch Strategy</span>
+    <div class="city-eyebrow-line"></div>
+  </div>
   <h2>One City.<br>First.</h2>
   <p>Launch in one metro with high renovation activity. Own that market deeply — tight installer network, strong supplier relationships, controllable brand reputation — before expanding anywhere else.</p>
-  <div class="cities">
+  <div class="city-names">
     <span class="city-name active">Washington, D.C.</span>
     <span class="city-name">Indianapolis</span>
     <span class="city-name">McLean</span>
@@ -810,56 +1352,88 @@
 </section>
 
 <!-- CONTACT -->
-<section class="contact">
+<section class="contact" id="contact">
   <div class="contact-inner">
-    <p class="section-label">Get In Touch</p>
-    <h2>Interested?<br><em>Let's talk.</em></h2>
-    <p class="contact-sub">Whether you have questions, want to learn more, or are interested in getting involved — reach out directly.</p>
-    <a href="mailto:jaimeleepurdue@gmail.com" class="contact-email">jaimeleepurdue@gmail.com</a>
+    <div class="section-tag reveal" style="justify-content: center;">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">Get In Touch</span>
+      <div class="section-tag-line"></div>
+    </div>
+    <h2 class="reveal">Interested?<br><em>Let's talk.</em></h2>
+    <p class="contact-sub reveal">Whether you have questions, want to learn more, or are interested in getting involved — reach out directly.</p>
+    <a href="mailto:jaimeleepurdue@gmail.com" class="contact-email reveal">jaimeleepurdue@gmail.com</a>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p>Confidential — Not for distribution</p>
-  <p>2026</p>
+  <p>Jaime Lee · 2026</p>
 </footer>
 
 <script>
-  // Phase tabs
-  function switchPhase(index) {
-    document.querySelectorAll('.phase-tab').forEach((t, i) => {
-      t.classList.toggle('active', i === index);
-    });
-    document.querySelectorAll('.phase-panel').forEach((p, i) => {
-      p.classList.toggle('active', i === index);
-    });
-  }
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, 100);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
 
-  reveals.forEach(el => observer.observe(el));
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
 
-  // City cycling
-  const cityNames = document.querySelectorAll('.city-name');
-  let current = 0;
-  setInterval(() => {
-    cityNames[current].classList.remove('active');
-    current = (current + 1) % cityNames.length;
-    cityNames[current].classList.add('active');
-  }, 2000);
+document.querySelectorAll('a, button, .step, .diff-item, .biz-item, .city-name').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+    ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+    ring.style.borderColor = 'rgba(200,65,43,0.6)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+    ring.style.transform = 'translate(-50%,-50%) scale(1)';
+    ring.style.borderColor = 'rgba(200,65,43,0.4)';
+  });
+});
+
+// Phase tabs
+function switchPhase(index) {
+  document.querySelectorAll('.phase-tab').forEach((t, i) => t.classList.toggle('active', i === index));
+  document.querySelectorAll('.phase-panel').forEach((p, i) => p.classList.toggle('active', i === index));
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// City cycling
+const cities = document.querySelectorAll('.city-name');
+let current = 0;
+setInterval(() => {
+  cities[current].classList.remove('active');
+  current = (current + 1) % cities.length;
+  cities[current].classList.add('active');
+}, 2200);
+
+// Nav blur on scroll
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav::before');
+});
 </script>
-
 </body>
 </html>
