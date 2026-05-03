@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounting Study Guide — Ch. 9–11 & 16</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #141416;
+    --surface2: #1c1c20;
+    --border: #2a2a30;
+    --accent: #e8c547;
+    --accent2: #5b8cf5;
+    --accent3: #e05a6b;
+    --accent4: #4ecdc4;
+    --text: #e8e8ec;
+    --muted: #7a7a8a;
+    --tag-bg: rgba(232,197,71,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    padding: 60px 40px 40px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(232,197,71,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 60px);
+    font-weight: 900;
+    line-height: 1.1;
+    color: #fff;
+    max-width: 700px;
+  }
+  h1 span { color: var(--accent); }
+  .header-sub {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+
+  /* NAV TABS */
+  .nav-bar {
+    display: flex;
+    gap: 0;
+    padding: 0 40px;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 16px 22px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    margin-bottom: -1px;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* MAIN CONTENT */
+  main { padding: 40px; max-width: 1100px; }
+
+  .chapter { display: none; animation: fadeUp 0.3s ease; }
+  .chapter.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION CARDS */
+  .section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .card-header:hover { background: var(--surface2); }
+  .card-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--tag-bg);
+    border: 1px solid rgba(232,197,71,0.25);
+    padding: 3px 8px;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    flex: 1;
+  }
+  .card-toggle {
+    font-size: 18px;
+    color: var(--muted);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .card-toggle.open { transform: rotate(180deg); }
+  .card-body {
+    padding: 24px;
+    display: none;
+  }
+  .card-body.open { display: block; }
+
+  /* CONTENT ELEMENTS */
+  h3 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent2);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: 22px 0 10px;
+  }
+  h3:first-child { margin-top: 0; }
+
+  p, li { font-size: 14px; color: #c8c8d4; line-height: 1.75; }
+  ul, ol { padding-left: 20px; }
+  ul li, ol li { margin-bottom: 6px; }
+  li::marker { color: var(--accent); }
+
+  strong { color: var(--text); font-weight: 500; }
+  em { color: var(--accent4); font-style: normal; font-weight: 500; }
+
+  /* FORMULA BOX */
+  .formula {
+    background: #0a0a0c;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 2px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    line-height: 1.8;
+  }
+  .formula .formula-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* JOURNAL ENTRY */
+  .je {
+    background: #0a0a0c;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 2px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    line-height: 2;
+  }
+  .je .je-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .je-dr { color: var(--accent4); }
+  .je-cr { color: var(--accent3); padding-left: 30px; display: block; }
+  .je-dr { display: block; }
+
+  /* RULE / ALERT */
+  .rule-box {
+    background: rgba(91,140,245,0.07);
+    border: 1px solid rgba(91,140,245,0.25);
+    border-radius: 2px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 13px;
+    color: #a8c0f8;
+  }
+  .rule-box.warn {
+    background: rgba(224,90,107,0.07);
+    border-color: rgba(224,90,107,0.25);
+    color: #f0a0aa;
+  }
+  .rule-box.success {
+    background: rgba(78,205,196,0.07);
+    border-color: rgba(78,205,196,0.25);
+    color: #8ee8e4;
+  }
+  .rule-box strong { color: inherit; }
+
+  /* TABLE */
+  .tbl-wrap { overflow-x: auto; margin: 14px 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: var(--surface2);
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: #c0c0cc;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* STEP LIST */
+  .steps { counter-reset: step; list-style: none; padding: 0; margin: 14px 0; }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(step);
+    min-width: 26px; height: 26px;
+    background: var(--accent);
+    color: #000;
+    border-radius: 50%;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .steps li p { margin: 0; }
+
+  /* TAGS */
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 2px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .tag.y { background: rgba(232,197,71,0.15); color: var(--accent); border: 1px solid rgba(232,197,71,0.3); }
+  .tag.b { background: rgba(91,140,245,0.15); color: var(--accent2); border: 1px solid rgba(91,140,245,0.3); }
+  .tag.r { background: rgba(224,90,107,0.15); color: var(--accent3); border: 1px solid rgba(224,90,107,0.3); }
+  .tag.g { background: rgba(78,205,196,0.15); color: var(--accent4); border: 1px solid rgba(78,205,196,0.3); }
+
+  /* QUIZ */
+  .quiz-section { margin-top: 10px; }
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 20px 24px;
+    margin-bottom: 18px;
+  }
+  .quiz-q {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .quiz-q span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-right: 8px;
+    letter-spacing: 0.1em;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #c0c0cc;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  .quiz-opt:hover { border-color: var(--accent); color: var(--text); }
+  .quiz-opt.correct { background: rgba(78,205,196,0.12); border-color: var(--accent4); color: var(--accent4); }
+  .quiz-opt.wrong { background: rgba(224,90,107,0.12); border-color: var(--accent3); color: var(--accent3); }
+  .quiz-explanation {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: #0a0a0c;
+    border-left: 3px solid var(--accent4);
+    font-size: 13px;
+    color: #a0a0b0;
+    display: none;
+  }
+  .quiz-score {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .quiz-score span { color: var(--accent); font-weight: 600; }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+  /* CHEAT SHEET GRID */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 14px 0; }
+  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
+  .mini-card {
+    background: #0a0a0c;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 16px;
+  }
+  .mini-card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .mini-card p, .mini-card li { font-size: 13px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">Intermediate Accounting · Study Reference</div>
+  <h1>Chapters <span>9–11</span> &amp; 16</h1>
+  <p class="header-sub">PP&amp;E · Depreciation &amp; Impairment · Intangibles &amp; R&amp;D · Investments</p>
+</header>
+
+<div class="nav-bar">
+  <button class="tab-btn active" onclick="showTab('ch9')">CH.9 — PP&amp;E</button>
+  <button class="tab-btn" onclick="showTab('ch10')">CH.10 — Depreciation</button>
+  <button class="tab-btn" onclick="showTab('ch11')">CH.11 — Intangibles</button>
+  <button class="tab-btn" onclick="showTab('ch16')">CH.16 — Investments</button>
+  <button class="tab-btn" onclick="showTab('quiz')">⚡ Practice Quiz</button>
+  <button class="tab-btn" onclick="showTab('cheatsheet')">📋 Cheat Sheet</button>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════ CH9 ══════════════════════════════ -->
+<div class="chapter active" id="ch9">
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">9.1</span>
+      <span class="card-title">Capitalized Costs — Historical Cost Principle</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <p>Capitalize the <strong>purchase price + all costs to bring the asset to its intended condition and location.</strong></p>
+      <h3>By Asset Type</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Asset</th><th>Capitalize</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Land</strong></td><td>Purchase price, closing costs, attorney fees, title insurance, clearing/filling/draining, demolition, assumption of liens</td><td class="warn" style="color:#f0a0aa">Subtract proceeds from salvaged materials!</td></tr>
+            <tr><td><strong>Land Improvements</strong></td><td>Fences, parking lots, driveways, landscaping</td><td>Separate depreciable account — limited life</td></tr>
+            <tr><td><strong>Buildings</strong></td><td>Materials, labor, overhead, architect fees, permits, excavation, reconditioning</td><td></td></tr>
+            <tr><td><strong>Equipment</strong></td><td>Purchase price, freight & handling, insurance in transit, special foundations, installation, initial testing</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rule-box warn"><strong>⚠ Key Point:</strong> Land is NEVER depreciated. Land improvements ARE depreciated (limited life).</div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">9.2</span>
+      <span class="card-title">Self-Constructed Assets &amp; Interest Capitalization</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <div class="rule-box"><strong>GAAP Rule:</strong> Capitalize actual interest incurred during construction (the lesser of avoidable vs. actual interest).</div>
+
+      <h3>Capitalization Period</h3>
+      <p>Begins when ALL three are met: construction starts, expenditures are incurred, AND interest is being incurred.<br>
+      Ends when the asset is <em>substantially complete and ready for use</em>, or interest stops.</p>
+
+      <h3>5-Step Calculation</h3>
+      <ol class="steps">
+        <li><p><strong>Weighted-Average Accumulated Expenditures (WAAE)</strong> — Multiply each expenditure × (months remaining ÷ 12).</p></li>
+        <li><p><strong>Identify interest rates</strong> — Use specific construction debt rate first (up to that debt's amount), then weighted-average of all other general debt for any excess.</p></li>
+        <li><p><strong>Avoidable Interest</strong> = WAAE × appropriate interest rate(s).</p></li>
+        <li><p><strong>Actual Interest</strong> = All outstanding principal × stated rates.</p></li>
+        <li><p><strong>Capitalize the LESSER</strong> of Avoidable Interest or Actual Interest.</p></li>
+      </ol>
+
+      <div class="je">
+        <span class="je-label">Journal Entry (Avoidable &lt; Actual)</span>
+        <span class="je-dr">Dr. Building ................ [Avoidable Interest]</span>
+        <span class="je-dr">Dr. Interest Expense ........ [Actual − Avoidable]</span>
+        <span class="je-cr">Cr. Cash .................. [Actual Interest]</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">9.3</span>
+      <span class="card-title">Costs Subsequent to Acquisition</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Treatment</th><th>Criteria</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Additions</strong></td><td><em>Capitalize</em></td><td>Always capitalize new additions</td></tr>
+            <tr><td><strong>Improvements / Replacements</strong></td><td><em>Capitalize</em></td><td>Extends useful life, increases quantity of output, OR enhances quality of output</td></tr>
+            <tr><td><strong>Ordinary Repairs</strong></td><td>Expense</td><td>Routine maintenance — no future benefit</td></tr>
+            <tr><td><strong>Major Repairs</strong></td><td><em>Capitalize</em></td><td>Treated as an addition or improvement</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="rule-box">
+        <strong>Improvements — Carry Value Known?</strong><br>
+        • Old asset's carrying value <em>known</em> → Remove old asset, recognize G/L.<br>
+        • Carrying value <em>unknown</em>: Life extended → Dr. Accum. Depr. | Productivity increased → Dr. Asset.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">9.4</span>
+      <span class="card-title">Dispositions &amp; Nonmonetary Exchanges</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <div class="rule-box success"><strong>Always first:</strong> Update depreciation to the date of sale or exchange.</div>
+
+      <h3>Commercial Substance?</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Scenario</th><th>Gain Treatment</th><th>Loss Treatment</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Has Commercial Substance</strong> (cash flows change)</td><td>Recognize immediately</td><td>Recognize immediately</td></tr>
+            <tr><td><strong>No Commercial Substance — no cash</strong></td><td>Defer entire gain; reduce basis of new asset</td><td>Recognize immediately</td></tr>
+            <tr><td><strong>No Commercial Substance — cash/boot received</strong></td><td>Recognize partial gain (see formula)</td><td>Recognize immediately</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Partial Gain Recognition Formula</h3>
+      <div class="formula">
+        <span class="formula-label">Recognized Gain (No Comm. Substance + Boot Received)</span>
+        Recognized Gain = Total Gain × [Cash Received ÷ (Cash Received + FV of Asset Received)]
+      </div>
+      <div class="rule-box warn"><strong>Exception:</strong> If cash received &gt; 25% of total transaction value → Recognize the ENTIRE gain.</div>
+      <p>Asset basis is based on the <strong>Fair Value of asset given up OR received</strong> — use whichever is more clearly evident.</p>
+    </div>
+  </div>
+
+</div><!-- /ch9 -->
+
+<!-- ══════════════════════════════ CH10 ══════════════════════════════ -->
+<div class="chapter" id="ch10">
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">10.1</span>
+      <span class="card-title">Depreciation Concepts &amp; Methods</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <div class="rule-box"><strong>Core Concept:</strong> Depreciation = cost allocation, NOT valuation. It matches expense to periods benefiting from the asset.</div>
+
+      <div class="formula">
+        <span class="formula-label">Depreciable Base</span>
+        Depreciable Base = Cost − Salvage Value
+      </div>
+
+      <p><strong>Partial Period:</strong> Calculate to the nearest full month (e.g., bought May 31 → use 7/12 of the year).</p>
+
+      <h3>Depreciation Methods</h3>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Method</th><th>Formula</th><th>Key Rules</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Straight-Line (SL)</strong></td>
+              <td><code>(Cost − SV) ÷ Life</code></td>
+              <td>Even expense each year; simplest method</td>
+            </tr>
+            <tr>
+              <td><strong>Double-Declining Balance (DDB)</strong></td>
+              <td><code>(2 ÷ Life) × Beginning Book Value</code></td>
+              <td>Do NOT subtract salvage value from base. Stop when BV = SV. Final year = plug figure.</td>
+            </tr>
+            <tr>
+              <td><strong>Sum-of-Years'-Digits (SYD)</strong></td>
+              <td><code>(Cost − SV) × (Remaining Years ÷ SYD)</code></td>
+              <td>SYD for 5-yr life = 5+4+3+2+1 = 15. Year 1 fraction = 5/15.</td>
+            </tr>
+            <tr>
+              <td><strong>Units-of-Production</strong></td>
+              <td><code>[(Cost − SV) ÷ Total Units] × Units This Period</code></td>
+              <td>Expense varies with actual usage/output</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="rule-box warn"><strong>DDB Critical Rule:</strong> Never deduct salvage value when computing the DDB rate — it's applied to raw book value. But stop depreciating once BV hits salvage value!</div>
+
+      <h3>Changes in Estimates (Prospective Treatment)</h3>
+      <p>Do <strong>NOT</strong> restate prior years. Going forward:</p>
+      <div class="formula">
+        <span class="formula-label">Revised Annual Depreciation</span>
+        (Remaining Book Value − New Salvage Value) ÷ Remaining Estimated Life
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">10.2</span>
+      <span class="card-title">Depletion of Natural Resources</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <p>Used for timber, oil, mining, and similar wasting assets.</p>
+      <div class="formula">
+        <span class="formula-label">Depletion Base</span>
+        Acquisition Costs + Exploration Costs + Intangible Development Costs + Asset Retirement Obligations − Salvage Value
+      </div>
+      <div class="formula">
+        <span class="formula-label">Depletion Rate</span>
+        Rate = Depletion Base ÷ Total Estimated Units
+      </div>
+
+      <h3>Journal Entries</h3>
+      <div class="je">
+        <span class="je-label">Extraction</span>
+        <span class="je-dr">Dr. Inventory ............... [Units × Rate]</span>
+        <span class="je-cr">Cr. Natural Resource Asset (or Accum. Depletion)</span>
+      </div>
+      <div class="je">
+        <span class="je-label">Sale</span>
+        <span class="je-dr">Dr. Cost of Goods Sold (Depletion Expense)</span>
+        <span class="je-cr">Cr. Inventory</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">10.3</span>
+      <span class="card-title">Asset Impairments</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <p>Occurs when the book value of a depreciable asset is <strong>not recoverable</strong>.</p>
+
+      <ol class="steps">
+        <li><p><strong>Recoverability Test:</strong> Is Book Value &gt; Sum of Undiscounted Expected Future Cash Flows? If YES → impaired.</p></li>
+        <li><p><strong>Calculate Loss:</strong> Impairment Loss = Book Value − Fair Value</p></li>
+      </ol>
+
+      <div class="je">
+        <span class="je-label">Impairment Journal Entry</span>
+        <span class="je-dr">Dr. Loss on Impairment ........ [BV − FV]</span>
+        <span class="je-cr">Cr. Accumulated Depreciation .. [BV − FV]</span>
+      </div>
+
+      <div class="rule-box warn"><strong>Important:</strong> Impairment losses on PP&E generally cannot be reversed under U.S. GAAP once recorded.</div>
+    </div>
+  </div>
+
+</div><!-- /ch10 -->
+
+<!-- ══════════════════════════════ CH11 ══════════════════════════════ -->
+<div class="chapter" id="ch11">
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">11.1</span>
+      <span class="card-title">Valuation of Intangibles</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Origin</th><th>Treatment</th><th>What's Included</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Purchased</strong></td>
+              <td><em>Capitalize at cost</em></td>
+              <td>Purchase price, legal fees, incidental expenses</td>
+            </tr>
+            <tr>
+              <td><strong>Internally Created</strong></td>
+              <td>Generally <strong>EXPENSE</strong> as incurred</td>
+              <td>Exception: Capitalize direct costs to secure/defend the intangible (e.g., legal fees to successfully defend a patent)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">11.2</span>
+      <span class="card-title">Types of Intangibles &amp; Amortization</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <div class="grid-2">
+        <div class="mini-card">
+          <div class="mini-card-title">Limited-Life Intangibles</div>
+          <ul>
+            <li>Customer lists, Copyrights, Patents</li>
+            <li>Franchises with set terms</li>
+          </ul>
+          <br>
+          <div class="formula" style="margin:0">Amortize over <em>useful life or legal life</em> (shorter)</div>
+          <br>
+          <p style="font-size:13px">Impairment: <strong>Recoverability test first</strong>, then Fair Value test.</p>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-title">Indefinite-Life Intangibles</div>
+          <ul>
+            <li>Trademarks, Trade names</li>
+            <li>Perpetual Franchises</li>
+          </ul>
+          <br>
+          <div class="rule-box warn" style="margin:0;font-size:12px"><strong>DO NOT amortize.</strong></div>
+          <br>
+          <p style="font-size:13px">Impairment: <strong>Fair Value test only</strong> (at least annually)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">11.3</span>
+      <span class="card-title">Goodwill &amp; Bargain Purchases</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <div class="rule-box"><strong>Goodwill:</strong> Only recorded when an <em>entire business</em> is purchased.</div>
+
+      <div class="formula">
+        <span class="formula-label">Goodwill Calculation</span>
+        Goodwill = Purchase Price − FMV of Net Identifiable Assets (Assets − Liabilities)
+      </div>
+
+      <div class="formula" style="border-left-color: var(--accent3)">
+        <span class="formula-label">Bargain Purchase (Purchase Price &lt; FMV of Net Assets)</span>
+        Record a GAIN (not negative goodwill on the balance sheet)
+      </div>
+
+      <ul>
+        <li>Goodwill is <strong>never amortized</strong></li>
+        <li>Tested for impairment <strong>at least annually</strong></li>
+        <li>Conceptually = future economic benefits of <em>unidentifiable</em> assets (synergies, brand, workforce, etc.)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">11.4</span>
+      <span class="card-title">Research &amp; Development (R&amp;D)</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <div class="rule-box warn"><strong>General Rule:</strong> R&D costs must be EXPENSED as incurred — no exceptions for materials, equipment, personnel, contract services, or indirect costs.</div>
+
+      <h3>The One Exception</h3>
+      <div class="rule-box success">
+        Equipment/facilities acquired for R&D that have <strong>alternative future uses</strong>:<br>
+        → <em>Capitalize the equipment</em> and depreciate it.<br>
+        → The <em>depreciation expense</em> is classified as R&D Expense for that period.
+      </div>
+
+      <div class="tag-row">
+        <span class="tag r">Expense: Materials</span>
+        <span class="tag r">Expense: Personnel</span>
+        <span class="tag r">Expense: Contract Services</span>
+        <span class="tag r">Expense: Indirect Costs</span>
+        <span class="tag g">Capitalize: Equipment w/ Alt. Use</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /ch11 -->
+
+<!-- ══════════════════════════════ CH16 ══════════════════════════════ -->
+<div class="chapter" id="ch16">
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">16.1</span>
+      <span class="card-title">Debt Securities — Three Categories</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Category</th><th>Intent</th><th>Valuation</th><th>Unrealized G/L Goes To</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Held-to-Maturity (HTM)</strong></td>
+              <td>Positive intent &amp; ability to hold to maturity</td>
+              <td><em>Amortized Cost</em></td>
+              <td>Not recognized (no income impact)</td>
+            </tr>
+            <tr>
+              <td><strong>Trading</strong></td>
+              <td>Near-term sale for capital gains</td>
+              <td><em>Fair Value</em></td>
+              <td><strong>Net Income</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Available-for-Sale (AFS)</strong></td>
+              <td>All other debt securities</td>
+              <td><em>Fair Value</em></td>
+              <td><strong>OCI</strong> (Stockholders' Equity — not income)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Effective-Interest Amortization</h3>
+      <div class="formula">
+        <span class="formula-label">Step-by-step</span>
+        Cash Received = Face Value × Stated Interest Rate<br>
+        Interest Revenue = Beginning Carrying Value × Market (Yield) Rate<br>
+        Amortization = |Cash Received − Interest Revenue|
+      </div>
+
+      <h3>Fair Value Adjustment Entry (AFS &amp; Trading)</h3>
+      <div class="je">
+        <span class="je-label">FV Adjustment</span>
+        <span class="je-dr">Dr. Fair Value Adjustment</span>
+        <span class="je-cr">Cr. Unrealized Holding Gain/Loss<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Equity/OCI (for AFS)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Net Income (for Trading)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">16.2</span>
+      <span class="card-title">Equity Securities — Level of Influence</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>Ownership</th><th>Influence</th><th>Method</th><th>Unrealized G/L</th><th>Dividends</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>&lt; 20%</td>
+              <td>Little / None</td>
+              <td><strong>Fair Value</strong></td>
+              <td>→ Net Income</td>
+              <td>Dividend Revenue (Income)</td>
+            </tr>
+            <tr>
+              <td>20%–50%</td>
+              <td>Significant</td>
+              <td><strong>Equity Method</strong></td>
+              <td>Ignored</td>
+              <td>Reduces Equity Investment account (return of capital)</td>
+            </tr>
+            <tr>
+              <td>&gt; 50%</td>
+              <td>Control</td>
+              <td><strong>Consolidation</strong></td>
+              <td>N/A</td>
+              <td>Intercompany eliminations</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">16.3</span>
+      <span class="card-title">Journal Entries Comparison — Fair Value vs. Equity Method</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+
+      <h3>1. Acquisition</h3>
+      <div class="grid-2">
+        <div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:6px">FAIR VALUE (&lt;20%)</p>
+          <div class="je" style="margin:0">
+            <span class="je-dr">Dr. Equity Investments</span>
+            <span class="je-cr">Cr. Cash</span>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:6px">EQUITY METHOD (20–50%)</p>
+          <div class="je" style="margin:0">
+            <span class="je-dr">Dr. Equity Investments</span>
+            <span class="je-cr">Cr. Cash</span>
+          </div>
+        </div>
+      </div>
+
+      <h3>2. Investee Reports Net Income</h3>
+      <div class="grid-2">
+        <div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:6px">FAIR VALUE</p>
+          <div class="rule-box" style="margin:0;font-size:13px">No Journal Entry</div>
+        </div>
+        <div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:6px">EQUITY METHOD</p>
+          <div class="je" style="margin:0">
+            <span class="je-dr">Dr. Equity Investments</span>
+            <span class="je-cr">Cr. Investment Income<br>&nbsp;&nbsp;&nbsp;(Total NI × % Owned)</span>
+          </div>
+        </div>
+      </div>
+
+      <h3>3. Dividends Declared &amp; Paid</h3>
+      <div class="grid-2">
+        <div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:6px">FAIR VALUE</p>
+          <div class="je" style="margin:0">
+            <span class="je-dr">Dr. Cash</span>
+            <span class="je-cr">Cr. Dividend Revenue</span>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:6px">EQUITY METHOD</p>
+          <div class="je" style="margin:0">
+            <span class="je-dr">Dr. Cash</span>
+            <span class="je-cr">Cr. Equity Investments<br>&nbsp;&nbsp;&nbsp;(Reduces carrying amount)</span>
+          </div>
+        </div>
+      </div>
+
+      <h3>4. Fair Value Adjustment at Year End</h3>
+      <div class="grid-2">
+        <div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:6px">FAIR VALUE</p>
+          <div class="je" style="margin:0">
+            <span class="je-dr">Dr. Fair Value Adjustment</span>
+            <span class="je-cr">Cr. Unrealized Holding G/L — Income</span>
+          </div>
+        </div>
+        <div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:6px">EQUITY METHOD</p>
+          <div class="rule-box" style="margin:0;font-size:13px">No Journal Entry<br>(FV changes ignored)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /ch16 -->
+
+<!-- ══════════════════════════════ QUIZ ══════════════════════════════ -->
+<div class="chapter" id="quiz">
+  <div class="quiz-score">Score: <span id="score-display">0</span> / <span id="total-display">0</span> answered</div>
+  <div class="quiz-section" id="quiz-container"></div>
+</div>
+
+<!-- ══════════════════════════════ CHEAT SHEET ══════════════════════════════ -->
+<div class="chapter" id="cheatsheet">
+
+  <div class="section-card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <span class="card-num">★</span>
+      <span class="card-title">Master Cheat Sheet — All Chapters</span>
+      <span class="card-toggle">▾</span>
+    </div>
+    <div class="card-body open">
+
+      <h3>Ch. 9 — PP&E Quick Rules</h3>
+      <ul>
+        <li>Land: never depreciated; subtract salvaged material proceeds</li>
+        <li>Self-constructed: capitalize <strong>lesser</strong> of avoidable vs. actual interest</li>
+        <li>WAAE × rate = avoidable interest; interest cap period ends at substantial completion</li>
+        <li>Nonmonetary exchange: always update depreciation first; commercial substance → recognize all G/L immediately</li>
+        <li>No commercial substance + gain + cash received &gt; 25% → recognize entire gain</li>
+      </ul>
+
+      <hr>
+      <h3>Ch. 10 — Depreciation Quick Rules</h3>
+      <ul>
+        <li>DDB: do NOT subtract SV from base; stop at BV = SV</li>
+        <li>SYD: use remaining years / sum for fraction; sum = n(n+1)/2</li>
+        <li>Estimate change → prospective; no prior restatement</li>
+        <li>Impairment: BV &gt; undiscounted CF → impaired; loss = BV − FV</li>
+        <li>Depletion base includes ARO (restoration costs)</li>
+      </ul>
+
+      <hr>
+      <h3>Ch. 11 — Intangibles Quick Rules</h3>
+      <ul>
+        <li>Internally generated intangibles → expense (except legal defense costs)</li>
+        <li>Limited-life → amortize; Indefinite-life → do NOT amortize</li>
+        <li>Goodwill: only on full business purchase; never amortized; annual impairment test</li>
+        <li>R&amp;D → expense, EXCEPT equipment with alternative future use → capitalize &amp; depreciate</li>
+        <li>Bargain purchase (Price &lt; FMV net assets) → record Gain</li>
+      </ul>
+
+      <hr>
+      <h3>Ch. 16 — Investments Quick Rules</h3>
+      <ul>
+        <li>HTM: amortized cost; no unrealized G/L recognized</li>
+        <li>Trading: FV; unrealized G/L → Net Income</li>
+        <li>AFS: FV; unrealized G/L → OCI (equity, not income)</li>
+        <li>&lt;20% → Fair Value method; dividends = revenue</li>
+        <li>20–50% → Equity method; investee NI increases investment account; dividends reduce it</li>
+        <li>Equity method: NO fair value adjustments at year end</li>
+      </ul>
+
+      <hr>
+      <h3>Key Formulas at a Glance</h3>
+      <div class="formula">
+        WAAE: Each Expenditure × (Months Outstanding ÷ 12)<br>
+        Avoidable Interest: WAAE × Rate(s)<br>
+        Capitalize: min(Avoidable, Actual)<br><br>
+        DDB: (2 ÷ Life) × Book Value [no SV deduction]<br>
+        SYD: (Cost − SV) × (Remaining ÷ SYD Sum)<br>
+        Change in Estimate: (Remaining BV − New SV) ÷ Remaining Life<br><br>
+        Goodwill: Purchase Price − FMV of Net Identifiable Assets<br>
+        Impairment Loss: Book Value − Fair Value<br><br>
+        Partial Gain: Total Gain × [Cash ÷ (Cash + FV Asset Received)]<br>
+        Equity Method Income: Total NI × Ownership %
+      </div>
+
+    </div>
+  </div>
+</div><!-- /cheatsheet -->
+
+</main>
+
+<script>
+// ── TAB SWITCHING ──
+function showTab(id) {
+  document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.currentTarget.classList.add('active');
+  if (id === 'quiz') buildQuiz();
+}
+
+// ── CARD TOGGLE ──
+function toggleCard(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.card-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
+}
+
+// ── QUIZ DATA ──
+const questions = [
+  {
+    q: "Which of the following costs should NOT be capitalized as part of the cost of land?",
+    opts: ["Attorney fees for title search", "Cost of demolishing an old building", "Proceeds from selling salvaged bricks", "Assumption of a prior mortgage"],
+    ans: 2,
+    exp: "Proceeds from selling salvaged materials are SUBTRACTED from the cost of land — they reduce the capitalized amount, not add to it."
+  },
+  {
+    q: "When capitalizing interest on a self-constructed asset, what amount is capitalized?",
+    opts: ["All actual interest incurred during construction", "All avoidable interest regardless of actual interest", "The lesser of avoidable interest or actual interest", "The greater of avoidable interest or actual interest"],
+    ans: 2,
+    exp: "GAAP requires capitalizing the LESSER of avoidable interest or actual interest incurred during the construction period."
+  },
+  {
+    q: "Under DDB depreciation, which statement is CORRECT?",
+    opts: ["Salvage value is subtracted from cost before applying the rate", "Depreciation stops when accumulated depreciation equals cost", "The rate is applied to beginning book value each period", "DDB produces equal depreciation expense each year"],
+    ans: 2,
+    exp: "DDB: rate = (2 ÷ life) × BEGINNING BOOK VALUE. Salvage value is NOT deducted from the base. Depreciation stops when BV = salvage value."
+  },
+  {
+    q: "Company A exchanges equipment with no commercial substance. They receive a gain and also receive cash (boot). Cash is 15% of total transaction value. What happens to the gain?",
+    opts: ["Recognize the entire gain immediately", "Defer the entire gain", "Recognize a partial gain using the boot formula", "Recognize a partial gain only if boot > 25%"],
+    ans: 2,
+    exp: "No commercial substance + cash received = partial gain recognized. Formula: Gain × [Cash ÷ (Cash + FV of Asset Received)]. The >25% threshold triggers FULL gain recognition, which doesn't apply here (15%)."
+  },
+  {
+    q: "An internally developed patent's legal costs to successfully DEFEND it in court should be:",
+    opts: ["Expensed immediately as R&D", "Capitalized as part of the patent's cost", "Recorded as a loss", "Amortized over 20 years immediately"],
+    ans: 1,
+    exp: "While internally created intangibles are generally expensed, an exception exists: direct costs to SECURE or DEFEND an intangible (like legal fees for a successful patent defense) are capitalized."
+  },
+  {
+    q: "Research and development (R&D) equipment that has alternative future uses should be:",
+    opts: ["Expensed entirely in the period purchased", "Capitalized and not depreciated", "Capitalized; depreciation classified as R&D expense", "Expensed as R&D over the asset's useful life"],
+    ans: 2,
+    exp: "Equipment with alternative future uses is the KEY exception to the 'expense R&D as incurred' rule. Capitalize it, then depreciate it — but classify the depreciation as R&D expense each period."
+  },
+  {
+    q: "Under the Equity Method (20–50% ownership), how are dividends received from the investee recorded?",
+    opts: ["Dr. Cash / Cr. Dividend Revenue", "Dr. Cash / Cr. Equity Investments", "Dr. Equity Investments / Cr. Investment Income", "No entry required"],
+    ans: 1,
+    exp: "Under the Equity Method, dividends are treated as a RETURN OF CAPITAL — they reduce the carrying amount of the investment (Cr. Equity Investments), not recognized as income."
+  },
+  {
+    q: "For Available-for-Sale (AFS) debt securities, unrealized holding gains and losses are reported in:",
+    opts: ["Net Income on the Income Statement", "Other Comprehensive Income (OCI) in Stockholders' Equity", "Retained Earnings directly", "Not reported until sold"],
+    ans: 1,
+    exp: "AFS unrealized G/L → OCI (a separate component of Stockholders' Equity). This is a key distinction from Trading securities, where unrealized G/L flows through Net Income."
+  },
+  {
+    q: "Goodwill can be recorded on the balance sheet ONLY when:",
+    opts: ["The company develops a strong internal brand", "An entire business is purchased at a premium", "The company has superior management talent", "The fair value of assets exceeds book value"],
+    ans: 1,
+    exp: "Goodwill is only recorded in a business combination (purchasing an entire business). It equals: Purchase Price − FMV of Net Identifiable Assets. Internally generated goodwill is NEVER recorded."
+  },
+  {
+    q: "Asset impairment is indicated when book value exceeds:",
+    opts: ["Fair value of the asset", "Replacement cost of the asset", "The sum of undiscounted expected future cash flows", "The present value of future cash flows"],
+    ans: 2,
+    exp: "Step 1 recoverability test: If BV > SUM OF UNDISCOUNTED future cash flows → impaired. Then Step 2 calculates the loss as BV − Fair Value. Note: the test uses UNDISCOUNTED cash flows, not present value."
+  },
+  {
+    q: "A change in estimated useful life or salvage value of a depreciable asset is accounted for:",
+    opts: ["Retrospectively — restate all prior periods", "Prospectively — adjust going forward only", "As a prior period error correction", "By recording a catch-up adjustment in the current year"],
+    ans: 1,
+    exp: "Changes in accounting ESTIMATES (like useful life or salvage value) are handled PROSPECTIVELY. No restatement of prior periods. Use: (Remaining BV − New SV) ÷ Remaining Life."
+  },
+  {
+    q: "Which debt security category uses AMORTIZED COST for balance sheet valuation?",
+    opts: ["Available-for-Sale", "Trading", "Held-to-Maturity", "All debt securities"],
+    ans: 2,
+    exp: "Only HTM (Held-to-Maturity) securities are carried at amortized cost. Both Trading and AFS securities are reported at Fair Value on the balance sheet."
+  }
+];
+
+let answered = 0, correct = 0;
+let quizBuilt = false;
+
+function buildQuiz() {
+  if (quizBuilt) return;
+  quizBuilt = true;
+  const container = document.getElementById('quiz-container');
+  document.getElementById('total-display').textContent = questions.length;
+
+  questions.forEach((q, qi) => {
+    const card = document.createElement('div');
+    card.className = 'quiz-card';
+    card.innerHTML = `
+      <div class="quiz-q"><span>Q${qi+1}</span>${q.q}</div>
+      <div class="quiz-options">
+        ${q.opts.map((o,oi) => `<button class="quiz-opt" onclick="answerQ(${qi},${oi},this)">${o}</button>`).join('')}
+      </div>
+      <div class="quiz-explanation" id="exp-${qi}">💡 ${q.exp}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function answerQ(qi, chosen, btn) {
+  const card = btn.closest('.quiz-card');
+  if (card.dataset.answered) return;
+  card.dataset.answered = 'true';
+  answered++;
+
+  const opts = card.querySelectorAll('.quiz-opt');
+  opts.forEach(o => o.disabled = true);
+
+  if (chosen === questions[qi].ans) {
+    btn.classList.add('correct');
+    correct++;
+  } else {
+    btn.classList.add('wrong');
+    opts[questions[qi].ans].classList.add('correct');
+  }
+
+  document.getElementById(`exp-${qi}`).style.display = 'block';
+  document.getElementById('score-display').textContent = correct;
+  document.getElementById('total-display').textContent = answered + ' / ' + questions.length;
+}
+</script>
+</body>
+</html>
